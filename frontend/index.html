@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Management System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="app">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">S</span>
+        <span class="brand-name">Studento</span>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-item active" data-view="dashboard">
+          <span class="nav-icon">▤</span> Dashboard
+        </button>
+        <button class="nav-item" data-view="students">
+          <span class="nav-icon">☰</span> Students
+        </button>
+        <button class="nav-item" data-view="departments">
+          <span class="nav-icon">◈</span> Departments
+        </button>
+        <button class="nav-item" id="sidebarAddBtn" data-view="add">
+          <span class="nav-icon">＋</span> Add Student
+        </button>
+      </nav>
+
+      <div class="sidebar-card">
+        <span class="sidebar-card-tag">New</span>
+        <p>Export your roster as CSV for reports.</p>
+        <button class="sidebar-card-btn">Export</button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+
+      <header class="topbar">
+        <div class="greeting">
+          <h1 id="greetingText">Good Afternoon, Admin</h1>
+          <p class="subtitle" id="todayDate"></p>
+        </div>
+        <div class="topbar-actions">
+          <div class="search-box">
+            <span class="search-icon">⌕</span>
+            <input type="text" id="searchInput" placeholder="Search students…">
+          </div>
+          <button class="icon-btn" aria-label="Notifications">🔔</button>
+          <button class="icon-btn" aria-label="Settings">⚙</button>
+          <div class="user-avatar">A</div>
+        </div>
+      </header>
+
+      <!-- Hero -->
+      <section class="hero">
+        <div class="hero-text">
+          <h2>Check your students' activity &amp; live updates</h2>
+          <p>A quick overview of who's enrolled and which departments are growing.</p>
+          <div class="hero-stats">
+            <div class="hero-stat">
+              <span class="hero-stat-icon teal">🎓</span>
+              <div>
+                <strong id="heroTotal">0</strong>
+                <span>Total Students</span>
+              </div>
+            </div>
+            <div class="hero-stat">
+              <span class="hero-stat-icon pink">◈</span>
+              <div>
+                <strong id="heroDepts">0</strong>
+                <span>Departments</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-shape shape-1"></div>
+          <div class="hero-shape shape-2"></div>
+          <div class="hero-shape shape-3"></div>
+        </div>
+      </section>
+
+      <!-- Middle row: chart + departments -->
+      <section class="mid-row">
+
+        <div class="card chart-card">
+          <div class="card-header">
+            <h3>Students by Department</h3>
+            <span class="pill">All time</span>
+          </div>
+          <div class="bar-chart" id="barChart"></div>
+        </div>
+
+        <div class="card dept-card">
+          <div class="card-header">
+            <h3>Departments</h3>
+            <span class="see-more">See all</span>
+          </div>
+          <ul class="dept-list" id="deptList"></ul>
+          <div class="dept-add">
+            <input type="text" id="newDeptInput" placeholder="New department name">
+            <button id="addDeptBtn">Add</button>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- Students table -->
+      <section class="card table-card">
+        <div class="card-header">
+          <h3>Students Info</h3>
+          <button id="addStudentBtn" class="btn-primary">+ Add Student</button>
+        </div>
+        <table id="studentsTable">
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="selectAll"></th>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Department</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="studentsBody"></tbody>
+        </table>
+        <div id="emptyState" class="empty-state hidden">No students match your search.</div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Modal -->
+  <div id="studentModal" class="modal hidden">
+    <div class="modal-content">
+      <h2 id="modalTitle">Add Student</h2>
+      <form id="studentForm">
+        <label>Name</label>
+        <input type="text" id="name" required>
+
+        <label>Age</label>
+        <input type="number" id="age" required>
+
+        <label>Department</label>
+        <input type="text" id="department" required list="deptOptions">
+        <datalist id="deptOptions"></datalist>
+
+        <label>Email</label>
+        <input type="email" id="email" required>
+
+        <div class="modal-actions">
+          <button type="button" id="cancelBtn" class="btn-secondary">Cancel</button>
+          <button type="submit" class="btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
