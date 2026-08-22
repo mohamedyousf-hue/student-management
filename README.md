@@ -1,160 +1,59 @@
-\# Student Management System
+# Student Management System
 
+A simple full-stack Student Management System built using FastAPI, JavaScript, SQLite, Docker, and Kubernetes.
 
+## Features
 
-A full-stack Student Management System built to practice backend development, containerization, and Kubernetes deployment.
+- Add students
+- View students
+- Search students
+- Delete students
+- View departments
+- Student statistics
 
+## Technologies
 
+- Frontend: HTML, CSS, JavaScript, Nginx
+- Backend: Python, FastAPI
+- Database: SQLite
+- DevOps: Docker, Kubernetes, Minikube
+- Version Control: Git, GitHub
 
-\## 🚀 Project Overview
-
-
-
-This project provides a web-based dashboard for managing students and viewing basic statistics.
-
-
-
-The application consists of:
-
-
-
-\- Frontend dashboard
-
-\- FastAPI backend
-
-\- SQLite database
-
-\- REST API
-
-\- Docker containers
-
-\- Kubernetes deployments and services
-
-
-
-\## 🛠️ Technologies
-
-
-
-\### Frontend
-
-\- HTML5
-
-\- CSS3
-
-\- JavaScript
-
-
-
-\### Backend
-
-\- Python
-
-\- FastAPI
-
-\- Uvicorn
-
-\- SQLAlchemy
-
-\- Pydantic
-
-
-
-\### DevOps
-
-\- Docker
-
-\- Kubernetes
-
-\- Git
-
-\- GitHub
-
-
-
-\### Database
-
-\- SQLite
-
-
-
-\## ✨ Features
-
-
-
-\- View students
-
-\- Search students by name or department
-
-\- Add new students
-
-\- Delete students
-
-\- View student status
-
-\- View total number of students
-
-\- View departments
-
-\- Display students by department
-
-\- RESTful API
-
-\- Dockerized frontend and backend
-
-\- Kubernetes Deployments and Services
-
-
-
-\## 📁 Project Structure
-
-
-
-```text
+## Project Structure
 
 student-management/
-
-│
-
 ├── backend/
-
-│   ├── Dockerfile
-
-│   ├── database.py
-
-│   ├── main.py
-
-│   ├── models.py
-
-│   └── requirements.txt
-
-│
-
 ├── frontend/
-
-│   ├── Dockerfile
-
-│   ├── index.html
-
-│   ├── script.js
-
-│   └── style.css
-
-│
-
 ├── k8s/
-
-│   ├── backend-deployment.yaml
-
-│   ├── backend-service.yaml
-
-│   ├── frontend-deployment.yaml
-
-│   └── frontend-service.yaml
-
-│
-
 ├── .gitignore
-
 └── README.md
 
+## Kubernetes
+
+The application is deployed on a local Kubernetes cluster using Minikube.
+
+Frontend runs on Nginx and the backend runs on FastAPI.
+
+## Run the Project
+
+Start Minikube:
+
+minikube start --driver=docker
+
+Deploy the application:
+
+kubectl apply -f k8s/
+
+Check the Pods:
+
+kubectl get pods
+
+Open the application:
+
+minikube service frontend-service --url
+
+## Author
+
+Mohamed Yousef
+
+GitHub: https://github.com/mohamedyousf-hue
