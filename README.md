@@ -1,59 +1,78 @@
 # Student Management System
 
-A simple full-stack Student Management System built using FastAPI, JavaScript, SQLite, Docker, and Kubernetes.
+A simple full-stack Student Management System built with FastAPI, JavaScript, SQLite, Docker, Kubernetes, Helm, and GitHub Actions.
 
 ## Features
 
-- Add students
-- View students
-- Search students
-- Delete students
+- Add, view, search, and delete students
 - View departments
-- Student statistics
+- View student statistics
 
-## Technologies
+## Tech Stack
 
-- Frontend: HTML, CSS, JavaScript, Nginx
-- Backend: Python, FastAPI
-- Database: SQLite
-- DevOps: Docker, Kubernetes, Minikube
-- Version Control: Git, GitHub
+- **Backend:** Python, FastAPI
+- **Frontend:** JavaScript, served by Nginx
+- **Database:** SQLite
+- **Containers:** Docker
+- **Orchestration:** Kubernetes (Minikube), Helm
+- **CI:** GitHub Actions, GitHub Container Registry (GHCR)
 
 ## Project Structure
 
+```
 student-management/
-├── backend/
-├── frontend/
-├── k8s/
-├── .gitignore
-└── README.md
+├── backend/          FastAPI backend and Dockerfile
+├── frontend/         JavaScript frontend and Dockerfile (Nginx)
+├── k8s/              Plain Kubernetes manifests
+├── student-chart/    Helm chart
+└── .github/workflows/ci.yml   CI pipeline
+```
 
-## Kubernetes
+## CI Pipeline
 
-The application is deployed on a local Kubernetes cluster using Minikube.
+The GitHub Actions workflow runs on every push to `master`. It builds the backend and frontend Docker images and pushes them to GitHub Container Registry:
 
-Frontend runs on Nginx and the backend runs on FastAPI.
+- `ghcr.io/mohamedyousf-hue/student-backend`
+- `ghcr.io/mohamedyousf-hue/student-frontend`
 
-## Run the Project
+## Deploy with Helm (Minikube)
 
-Start Minikube:
+Requirements: Docker, Minikube, kubectl, Helm.
 
-minikube start --driver=docker
-
-Deploy the application:
-
-kubectl apply -f k8s/
-
-Check the Pods:
-
+```bash
+minikube start
+helm install student student-chart
 kubectl get pods
+minikube service frontend-service
+```
 
-Open the application:
+Scale the backend without editing any file:
 
-minikube service frontend-service --url
+```bash
+helm upgrade student student-chart --set backend.replicas=2
+helm history student
+```
 
-## Author
+Roll back to the first release:
 
-Mohamed Yousef
+```bash
+helm rollback student 1
+```
 
-GitHub: https://github.com/mohamedyousf-hue
+Remove everything:
+
+```bash
+helm uninstall student
+```
+
+## Configuration
+
+Image names, replica counts, ports, and service types are set in `student-chart/values.yaml`.
+
+## Plain Kubernetes Manifests
+
+The `k8s/` folder contains the same Deployments and Services as raw manifests. They use locally built images (`imagePullPolicy: Never`), so build the images inside Minikube first, then run:
+
+```bash
+kubectl apply -f k8s/
+```
