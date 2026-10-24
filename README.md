@@ -11,8 +11,8 @@ A simple full-stack Student Management System built with FastAPI, JavaScript, SQ
 ## Tech Stack
 
 - **Backend:** Python, FastAPI
+- **ORM / Database:** SQLAlchemy, SQLite
 - **Frontend:** JavaScript, served by Nginx
-- **Database:** SQLite
 - **Containers:** Docker
 - **Orchestration:** Kubernetes (Minikube), Helm
 - **CI:** GitHub Actions, GitHub Container Registry (GHCR)
@@ -27,9 +27,8 @@ student-management/
 ├── student-chart/    Helm chart
 └── .github/workflows/ci.yml   CI pipeline
 ```
-## API Endpoints
 
-The backend is a FastAPI application with SQLAlchemy and SQLite.
+## API Endpoints
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
