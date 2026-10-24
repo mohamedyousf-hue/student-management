@@ -27,6 +27,31 @@ student-management/
 ├── student-chart/    Helm chart
 └── .github/workflows/ci.yml   CI pipeline
 ```
+## API Endpoints
+
+The backend is a FastAPI application with SQLAlchemy and SQLite.
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/` | Health check |
+| GET | `/students` | List students, with optional `?search=` filter on name or department |
+| GET | `/students/stats` | Total students, active students, and count per department |
+| GET | `/students/{id}` | Get one student |
+| POST | `/students` | Create a student (rejects duplicate emails) |
+| PUT | `/students/{id}` | Update a student |
+| DELETE | `/students/{id}` | Delete a student |
+
+Interactive API docs are available at `/docs` when the backend is running.
+
+## Run the Backend Locally
+
+```bash
+cd backend
+pip install -r requirements.txt
+uvicorn main:app --reload
+```
+
+Then open `http://127.0.0.1:8000/docs`.
 
 ## CI Pipeline
 
